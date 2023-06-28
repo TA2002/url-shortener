@@ -10,9 +10,11 @@ class HomeView(View):
     def get(self, request, *args, **kwargs):
         the_form = SubmitUrlForm()
 
+        bg_image = 'https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?cs=srgb&dl=pexels-pixabay-36717.jpg&fm=jpg'
         context = {
-            "title": 'Linky.co',
-            "form": the_form
+            "title": "Linky.co",
+            "form": the_form,
+            "bg_image": bg_image
         }
 
         return render(request, "shortener/home.html", context)
@@ -22,10 +24,11 @@ class HomeView(View):
         # print(request.POST["url"])
         # print(request.POST.get("url"))
         form = SubmitUrlForm(request.POST)
-
+        bg_image = 'https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?cs=srgb&dl=pexels-pixabay-36717.jpg&fm=jpg'
         context = {
             "title": "Linky.co",
-            "form": form
+            "form": form,
+            "bg_image": bg_image
         }
         template = "shortener/home.html"
         if form.is_valid():
@@ -46,7 +49,7 @@ class HomeView(View):
         return render(request, template, context)
 
 
-class LinkyCBView(View): #class based view
+class URLRedirectView(View): #class based view
     def get(self, request, shortcode=None, *args, **kwargs):
         obj = get_object_or_404(LinkyURL, shortcode=shortcode)
         return HttpResponseRedirect(obj.url)

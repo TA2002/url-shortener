@@ -1,9 +1,58 @@
-<div style='width: 800px; margin: 0 auto;'>
-    <h1>{{ title }}</h1>
+{% extends 'base.html' %}
 
-    <form method='POST' action='.'> {% csrf_token %}
-        <!-- <input name='url' type='text' placeholder='Shorten your URL' /> -->
-        {{ form.as_p }}
-        <input type='submit' value='Shorten' >
+{% block styles %}
+<style>
+body {
+  background-color: #226268;
+  {% if bg_image %}background-image: url({{ bg_image }});{% endif %}
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.btn-link {
+  color: #50dfec;
+  text-shadow: none;
+}
+
+.btn-link:hover {
+  color: #000000;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container .btn-primary {
+  margin-top: 10px;
+}
+</style>
+
+{% endblock styles %}
+
+{% block content %}
+
+<div class="container">
+  <h1 class="cover-heading">{{ title }}</h1>
+  <p class="lead">Shorten that URL</p>
+  <div class="col-sm-6">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      <!-- <input name='url' type='text' placeholder='Shorten your URL like http://www.codingforentrepreneurs.com' /> -->
+      {{ form.as_p }}
+      <div class="form-container">
+        <input class="btn btn-primary" type="submit" value="Shorten &raquo;">
+      </div>
     </form>
+  </div>
 </div>
+
+{% endblock content %}

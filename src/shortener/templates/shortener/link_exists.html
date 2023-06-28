@@ -1,7 +1,21 @@
-<div style='width: 800px; margin: 0 auto;'>
-    <h1>Exists</h1>
-    <p>{{ object.url }}</p>
+{% extends "base.html" %}
 
-    <p>{{ object.shortcode }}</p>
-    <a href='/'>+ New</a>>
+{% block title %}
+{{ object.shortcode }} | {{ block.super }} 
+{% endblock title %}
+
+{% block content %}
+<style>
+    .long-url {
+        word-break: break-all;
+    }
+</style>
+
+<div class=''>
+    <h1>Exists Already</h1>
+    <p class='long-url'>{{ object.url }}</p>
+
+    <p><a class='btn btn-link' href='{{ object.get_short_url }}'>{{ object.get_short_url }}</a></p>
+    <a class='btn btn-default' href='/'>+ New</a>
 </div>
+{% endblock content %}

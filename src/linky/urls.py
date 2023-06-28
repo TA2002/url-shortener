@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, re_path
 
-from shortener.views import HomeView, LinkyCBView
+from shortener.views import HomeView, URLRedirectView
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
-    re_path(r'^(?P<shortcode>[\w-]+)/$', LinkyCBView.as_view()), #joincfe.com/projects/
+    re_path(r'^(?P<shortcode>[\w-]+)/$', URLRedirectView.as_view(), name='scode'), #joincfe.com/projects/
     re_path(r'^$', HomeView.as_view()),
 ]
 
